@@ -50,5 +50,19 @@ int main(int argc, char *argv[]) {
     password_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
     vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
-    gtk_box_
+    gtk_box_pack_start(GTK_BOX(user_hbox), user_label, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(user_hbox), user_entry, TRUE, FALSE, 5);
+
+    gtk_box_pack_start(GTK_BOX(passwd_hbox), passwd_label, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(passwd_hbox), passwd_entry, TRUE, FALSE, 5);
+
+    gtk_box_pack_start(GTK_BOX(vbox), user_hbox, FALSE, FALSE, 10);
+    gtk_box_pack_start(GTK_BOX(vbox), passwd_hbox, FALSE, FALSE, 10);
+    gtk_box_pack_start(GTK_BOX(vbox), message_label, FALSE, FALSE, 10);
+
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+    gtk_widget_show_all(window);
+    gtk_main();
+
+    return 0;
 }    
