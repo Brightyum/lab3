@@ -9,13 +9,13 @@ void quit(GtkWidget *widget, gpointer data) {
     gtk_main_quit();
 }
 
-void input_completed(GtkWidget *widget, gpointer data) {
+void input_completed(GtkWidget *entry, gpointer data) {
     const char *text = gtk_entry_get_text(GTK_ENTRY((GtkWidget *)entry));
 
     if (strcmp(text, password) == 0) {
-        gtk_label_set_text(GTK_LABEL((GtkWidget *)data), "로긴이 허용됩니다.\n");
+        gtk_label_set_text(GTK_LABEL((GtkWidget *)data), "Login allowed.\n");
     } else {
-        gtk_label_set_text(GTK_LABEL((GtkWidget *)data), "입력 오류입니다.\n");
+        gtk_label_set_text(GTK_LABEL((GtkWidget *)data), "Input error.\n");
     }
 }
 
@@ -30,24 +30,24 @@ int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "사용자 입력창");
+    gtk_window_set_title(GTK_WINDOW(window), "User Input Window");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 200, 150);
     
     g_signal_connect(window, "destroy", G_CALLBACK(quit), NULL);
 
-    user_label = gtk_label_new("사용자:");
-    passwd_label = gtk_label_new("비밀번호:");
+    user_label = gtk_label_new("User Name:");
+    passwd_label = gtk_label_new("Password:");
 
     user_entry = gtk_entry_new();
     passwd_entry = gtk_entry_new();
 
     gtk_entry_set_visibility(GTK_ENTRY(passwd_entry), FALSE);
-    message_label = gtk_label_new("이름과 패스워드를 입력하세요.\n");
-    g_signal_connect(passwd_entry, "clicked", GTK_SIGNAL_FUNC(input_completed), message_label);
+    message_label = gtk_label_new("Enter your User Name and Password.\n");
+    g_signal_connect(passwd_entry, "clicked", G_CALLBACK(input_completed), message_label);
 
     user_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-    password_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    passwd_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
     vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
     gtk_box_pack_start(GTK_BOX(user_hbox), user_label, TRUE, FALSE, 5);

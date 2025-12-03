@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 
-#define PORT 3490
+#define PORT 9490
 #define QLEN 10
 #define BUF_SIZE 1024
 
